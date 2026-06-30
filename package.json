@@ -1,0 +1,6 @@
+{
+  "name": "aksh-conformance-sample",
+  "private": true,
+  "scripts": {"test": "node src/index.js"},
+  "dependencies": {}
+}
