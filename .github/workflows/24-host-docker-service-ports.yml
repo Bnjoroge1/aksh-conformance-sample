@@ -3,7 +3,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   ports:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     services:
       web:
         image: nginx:1.27-alpine
