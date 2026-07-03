@@ -1,0 +1,11 @@
+name: host-docker-container-action
+on: [push, workflow_dispatch]
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run docker image action
+        uses: docker://alpine:3.20
+        with:
+          args: sh -c 'echo docker-action-ok'
