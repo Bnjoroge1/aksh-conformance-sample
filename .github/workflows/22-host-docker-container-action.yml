@@ -8,4 +8,4 @@ jobs:
       - name: Run docker image action
         uses: docker://alpine:3.20
         with:
-          args: sh -c 'echo docker-action-ok'
+          args: echo docker-action-ok
