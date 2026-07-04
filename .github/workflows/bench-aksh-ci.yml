@@ -4,17 +4,21 @@ on: workflow_dispatch
 jobs:
   rust:
     runs-on: [self-hosted]
-    defaults:
-      run:
-        working-directory: /workspace
-    env:
-      PATH: /root/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     steps:
       - name: cargo fmt
-        run: cargo fmt --all --check
+        run: |
+          export PATH="/root/.cargo/bin:$PATH"
+          cd /workspace
+          cargo fmt --all --check
 
       - name: cargo clippy
-        run: cargo clippy --workspace --all-targets
+        run: |
+          export PATH="/root/.cargo/bin:$PATH"
+          cd /workspace
+          cargo clippy --workspace --all-targets
 
       - name: cargo test
-        run: cargo test --workspace --quiet
+        run: |
+          export PATH="/root/.cargo/bin:$PATH"
+          cd /workspace
+          cargo test --workspace --quiet
