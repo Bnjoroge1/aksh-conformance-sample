@@ -5,3 +5,4 @@ RUN chmod +x /test/pre.sh /test/main.sh /test/post.sh
 # F046 test
 # public
 # official test
+# aksh test
