@@ -1,0 +1,19 @@
+name: docker-lifecycle-test
+description: Tests Docker action pre-entrypoint/post-entrypoint lifecycle (F046) and manifest field evaluation (F047).
+inputs:
+  test-arg:
+    description: Argument passed through runs.args
+    required: true
+  test-env:
+    description: Environment value passed through runs.env
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+  pre-entrypoint: /test/pre.sh
+  entrypoint: /test/main.sh
+  post-entrypoint: /test/post.sh
+  args:
+    - ${{ inputs.test-arg }}
+  env:
+    MANIFEST_ENV: ${{ inputs.test-env }}

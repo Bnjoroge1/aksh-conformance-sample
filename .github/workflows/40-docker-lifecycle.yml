@@ -1,0 +1,27 @@
+name: 40-docker-lifecycle
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/40-docker-lifecycle.yml', '.github/actions/docker-lifecycle/**']
+
+jobs:
+  docker-lifecycle:
+    runs-on: self-hosted
+    timeout-minutes: 10
+    steps:
+      - name: Clean markers
+        run: rm -rf .fidelity && mkdir -p .fidelity
+
+      - name: Docker action with pre/main/post lifecycle
+        uses: preloopdev/aksh-conformance-sample/.github/actions/docker-lifecycle@main
+        with:
+          test-arg: alpha
+          test-env: beta
+
+      - name: Assert lifecycle
+        run: |
+          echo "=== lifecycle.log ==="
+          cat .fidelity/lifecycle.log
+          grep -Fx 'pre|env=beta|arg=alpha' .fidelity/lifecycle.log && echo "PRE OK"
+          grep -Fx 'main|env=beta|arg=alpha' .fidelity/lifecycle.log && echo "MAIN OK"
+          grep -Fx 'post|env=beta|arg=alpha' .fidelity/lifecycle.log && echo "POST OK"
