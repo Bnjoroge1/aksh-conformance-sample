@@ -1,0 +1,25 @@
+name: "bench: aksh-ci"
+on: workflow_dispatch
+
+jobs:
+  rust:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: preloopdev/aksh
+          ref: main
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.86"
+          components: rustfmt,clippy
+
+      - name: cargo fmt
+        run: cargo fmt --all --check
+
+      - name: cargo clippy
+        run: cargo clippy --workspace --all-targets
+
+      - name: cargo test
+        run: cargo test --workspace --quiet
