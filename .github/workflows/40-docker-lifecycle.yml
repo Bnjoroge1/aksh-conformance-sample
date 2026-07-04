@@ -6,7 +6,7 @@ on:
 
 jobs:
   docker-lifecycle:
-    runs-on: self-hosted
+    runs-on: [self-hosted, f046-test]
     timeout-minutes: 10
     steps:
       - name: Clean markers
