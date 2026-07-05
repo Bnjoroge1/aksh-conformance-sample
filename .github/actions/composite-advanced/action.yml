@@ -1,0 +1,63 @@
+name: composite-advanced
+description: Tests if conditions, continue-on-error, and env propagation in composite actions
+inputs:
+  mode:
+    required: true
+    description: "pass or fail"
+outputs:
+  final-result:
+    description: "Result message"
+    value: ${{ steps.report.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - id: setup
+      run: |
+        echo "MODE=${{ inputs.mode }}" >> "$GITHUB_ENV"
+        echo "COMPOSITE_PATH_ENTRY=/tmp/composite-bin" >> "$GITHUB_PATH"
+        echo "Setup complete, mode=${{ inputs.mode }}"
+      shell: bash
+
+    - id: check-env-propagation
+      run: |
+        echo "MODE from GITHUB_ENV: $MODE"
+        if [[ -z "$MODE" ]]; then
+          echo "FAIL: GITHUB_ENV not propagated between composite steps"
+          exit 1
+        fi
+        echo "PASS: GITHUB_ENV propagated"
+        echo "PATH check: $PATH"
+        if [[ "$PATH" != */tmp/composite-bin* ]]; then
+          echo "FAIL: GITHUB_PATH not propagated between composite steps"
+          exit 1
+        fi
+        echo "PASS: GITHUB_PATH propagated"
+      shell: bash
+
+    - id: intentional-fail
+      if: inputs.mode == 'fail'
+      continue-on-error: true
+      run: |
+        echo "This step intentionally fails"
+        exit 1
+      shell: bash
+
+    - id: skip-check
+      if: inputs.mode == 'skip-me'
+      run: |
+        echo "FAIL: this step should have been skipped"
+        exit 1
+      shell: bash
+
+    - id: check-prev-outcome
+      if: steps.intentional-fail.outcome == 'failure'
+      run: |
+        echo "PASS: detected intentional-fail outcome=${{ steps.intentional-fail.outcome }}"
+        echo "PASS: conclusion=${{ steps.intentional-fail.conclusion }}"
+      shell: bash
+
+    - id: report
+      run: |
+        echo "result=all-checks-passed" >> "$GITHUB_OUTPUT"
+        echo "All composite checks passed"
+      shell: bash
