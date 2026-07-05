@@ -33,4 +33,3 @@ jobs:
       - name: Verify job completes normally
         run: |
           echo "PASS: All steps completed — auth and diag features working"
-# official

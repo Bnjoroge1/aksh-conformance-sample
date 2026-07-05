@@ -9,8 +9,6 @@ jobs:
     runs-on: [self-hosted, f055-test]
     timeout-minutes: 5
     steps:
-      # F055: Test hashFiles with --follow-symbolic-links flag
-      # hashFiles() is evaluated at expression time, so we use env: to capture values
       - name: Create test files and symlinks
         run: |
           mkdir -p "$GITHUB_WORKSPACE/hashtest"
@@ -19,7 +17,6 @@ jobs:
           ln -sf "$GITHUB_WORKSPACE/hashtest/file-a.txt" "$GITHUB_WORKSPACE/hashtest/link-to-a.txt"
           ls -la "$GITHUB_WORKSPACE/hashtest/"
 
-      # hashFiles without flag
       - name: hashFiles without flag
         env:
           HASH_NORMAL: ${{ hashFiles('hashtest/*.txt') }}
@@ -31,22 +28,20 @@ jobs:
             echo "INFO: hashFiles returned empty (files may not exist at expression eval time)"
           fi
 
-      # hashFiles WITH --follow-symbolic-links flag
       - name: hashFiles with follow-symbolic-links
         env:
           HASH_FOLLOW: ${{ hashFiles('--follow-symbolic-links', 'hashtest/*.txt') }}
         run: |
           echo "Hash with flag: $HASH_FOLLOW"
           if [ -n "$HASH_FOLLOW" ]; then
-            echo "PASS: hashFiles with --follow-symbolic-links returned a hash"
+            echo "PASS: hashFiles with follow-symbolic-links returned a hash"
           else
             echo "INFO: hashFiles with flag returned empty (files may not exist at expression eval time)"
           fi
 
-      # F056: Verify runner registered (FIPS setting read from agent response)
-      - name: Verify registration with FIPS from agent response
+      - name: Verify FIPS from agent response
         run: |
-          echo "Runner is registered and running — FIPS settings loaded from agent response"
+          echo "Runner registered and running - FIPS settings loaded from agent response"
           echo "PASS: F056 requireFipsCryptography from agent response"
 
       - name: All checks passed
