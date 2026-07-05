@@ -86,3 +86,4 @@ jobs:
           echo "PASS: format() works"
         env:
           FMT: ${{ format('Hello {0} {1}', 'World', 42) }}
+# retest
