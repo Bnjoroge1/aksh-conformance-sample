@@ -1,6 +1,9 @@
 name: E2E serde
 on: workflow_dispatch
 
+env:
+  RUSTUP_TOOLCHAIN: stable
+
 jobs:
   fmt:
     name: Rustfmt
