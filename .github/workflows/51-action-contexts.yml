@@ -1,0 +1,55 @@
+name: 51-action-contexts
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/51-action-contexts.yml']
+
+jobs:
+  action-contexts:
+    runs-on: [self-hosted, f044-test]
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assert action contexts after checkout
+        run: |
+          echo "=== github context after actions/checkout ==="
+          echo "action_repository=${{ github.action_repository }}"
+          echo "action_ref=${{ github.action_ref }}"
+          echo "action=${{ github.action }}"
+          echo "action_path=${{ github.action_path }}"
+          echo "action_status=${{ github.action_status }}"
+
+          # After checkout completes, these should reflect the LAST action that ran
+          # action_repository should be 'actions/checkout'
+          # action_ref should be 'v4' (the ref we used)
+          if [ "${{ github.action_repository }}" != "actions/checkout" ]; then
+            echo "FAIL: action_repository='${{ github.action_repository }}' expected 'actions/checkout'"
+            exit 1
+          fi
+          if [ -z "${{ github.action_ref }}" ]; then
+            echo "FAIL: action_ref is empty"
+            exit 1
+          fi
+          echo "PASS: action_repository and action_ref are set correctly"
+
+      # Use a second action to verify contexts update
+      - uses: actions/github-script@v7
+        id: script-action
+        with:
+          script: |
+            core.info(`action_repository=${context.github.action_repository}`);
+            core.info(`action_ref=${context.github.action_ref}`);
+            core.setOutput('repo', 'actions/github-script');
+            return 'ok';
+          result-encoding: string
+
+      - name: Assert contexts updated for second action
+        run: |
+          echo "action_repository after github-script: ${{ github.action_repository }}"
+          echo "action_ref after github-script: ${{ github.action_ref }}"
+          if [ "${{ github.action_repository }}" != "actions/github-script" ]; then
+            echo "FAIL: action_repository not updated to 'actions/github-script'"
+            exit 1
+          fi
+          echo "PASS: action contexts update correctly between actions"

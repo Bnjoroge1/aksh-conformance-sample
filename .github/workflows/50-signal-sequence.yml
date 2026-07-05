@@ -1,0 +1,42 @@
+name: 50-signal-sequence
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/50-signal-sequence.yml']
+
+jobs:
+  signal-test:
+    runs-on: [self-hosted, f042-test]
+    timeout-minutes: 5
+    steps:
+      # Step 1: Start a long process that traps signals and logs them,
+      # then cancel this run from a background subshell after 8s.
+      # The runner should send SIGINT first, then SIGTERM after grace period.
+      - name: Trap signals and self-cancel
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+          REPO: ${{ github.repository }}
+        run: |
+          SIGLOG="/tmp/signal-test-$$"
+
+          # Background: cancel this run after 8 seconds
+          (
+            sleep 8
+            echo "Cancelling run $RUN_ID..."
+            curl -s -X POST \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$REPO/actions/runs/$RUN_ID/cancel" || true
+          ) &
+          CANCEL_PID=$!
+
+          # Trap signals and record them
+          trap 'echo "SIGINT received" >> "$SIGLOG"; echo "SIGINT"; exit 130' INT
+          trap 'echo "SIGTERM received" >> "$SIGLOG"; echo "SIGTERM"; exit 143' TERM
+
+          echo "Waiting for cancellation (PID $$)..."
+          # Busy-wait so traps fire (sleep in a loop)
+          for i in $(seq 1 120); do
+            sleep 1
+          done
