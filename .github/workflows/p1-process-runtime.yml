@@ -1,5 +1,7 @@
 name: P1 Process and Runtime Verification
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
 jobs:
   process-tests:
     runs-on: [self-hosted, p1-test]
