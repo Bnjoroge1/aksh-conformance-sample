@@ -450,6 +450,7 @@ jobs:
           echo "PASS: success() branch ran when no prior failure state is visible"
 
       - name: Remove problem matcher
+        if: ${{ always() }}
         shell: bash
         run: |
           set -euo pipefail
@@ -458,6 +459,7 @@ jobs:
           echo "PASS: problem matcher removed"
 
       - name: Mask fake secret
+        if: ${{ always() }}
         shell: bash
         run: |
           set -euo pipefail
@@ -469,6 +471,7 @@ jobs:
           echo "PASS: secret masking command emitted"
 
       - name: Set recovery output
+        if: ${{ always() }}
         id: recover
         shell: bash
         run: |
