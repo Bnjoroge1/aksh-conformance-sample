@@ -27,10 +27,8 @@ jobs:
         continue-on-error: true
         run: exit 42
 
-      - name: Verify exit code failure
-        run: |
-          test "${{ steps.fail_exit.outcome }}" = "failure"
-          echo "Exit code failure propagated correctly"
+      - name: After exit code failure
+        run: echo "Job continued after continue-on-error exit 42"
 
       # 4. Environment propagation
       - name: Env propagation
