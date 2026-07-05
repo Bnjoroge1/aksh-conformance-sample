@@ -8,3 +8,4 @@ RUN chmod +x /test/pre.sh /test/main.sh /test/post.sh
 # aksh test
 # debug
 # debug2
+# fix
