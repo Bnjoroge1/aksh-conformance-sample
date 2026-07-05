@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
 MESSAGE="${1:-missing-message}"
 
 echo "docker action message: ${MESSAGE}"
 
-if [[ -z "${GITHUB_OUTPUT:-}" ]]; then
+if [ -z "${GITHUB_OUTPUT:-}" ]; then
   echo "GITHUB_OUTPUT is missing" >&2
   exit 1
 fi
