@@ -1,8 +1,8 @@
-name: 59-hashfiles-symlinks
+name: 60-hashfiles-and-fips
 on:
   workflow_dispatch:
   push:
-    paths: ['.github/workflows/59-hashfiles-symlinks.yml']
+    paths: ['.github/workflows/60-hashfiles-and-fips.yml']
 
 jobs:
   hashfiles-test:
