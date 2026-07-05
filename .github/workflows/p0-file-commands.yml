@@ -2,7 +2,7 @@ name: P0 File Commands Verification
 on: workflow_dispatch
 jobs:
   file-commands:
-    runs-on: [self-hosted, p0-test]
+    runs-on: [self-hosted, p0-file-cmds]
     steps:
       # 1. NODE_OPTIONS blocking — GITHUB_ENV must not allow NODE_OPTIONS
       - name: Attempt to set NODE_OPTIONS via GITHUB_ENV
