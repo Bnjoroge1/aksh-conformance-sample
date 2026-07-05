@@ -19,7 +19,7 @@ jobs:
 
       - name: hashFiles without flag
         env:
-          HASH_NORMAL: ${{ hashFiles('hashtest/*.txt') }}
+          HASH_NORMAL: "${{ hashFiles('hashtest/*.txt') }}"
         run: |
           echo "Hash without flag: $HASH_NORMAL"
           if [ -n "$HASH_NORMAL" ]; then
@@ -30,7 +30,7 @@ jobs:
 
       - name: hashFiles with follow-symbolic-links
         env:
-          HASH_FOLLOW: ${{ hashFiles('--follow-symbolic-links', 'hashtest/*.txt') }}
+          HASH_FOLLOW: "${{ hashFiles('--follow-symbolic-links', 'hashtest/*.txt') }}"
         run: |
           echo "Hash with flag: $HASH_FOLLOW"
           if [ -n "$HASH_FOLLOW" ]; then
@@ -46,4 +46,3 @@ jobs:
 
       - name: All checks passed
         run: echo "PASS: F055 and F056 verified"
-
