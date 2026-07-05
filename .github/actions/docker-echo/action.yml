@@ -1,0 +1,17 @@
+name: docker-echo
+description: Verify local Docker action execution and outputs.
+
+inputs:
+  message:
+    required: true
+    description: Message to echo.
+
+outputs:
+  docker-result:
+    description: Docker action result.
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.message }}

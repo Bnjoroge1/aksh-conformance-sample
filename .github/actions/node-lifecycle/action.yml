@@ -1,0 +1,17 @@
+name: node-lifecycle
+description: Verify JavaScript action pre/main/post lifecycle.
+
+inputs:
+  case-name:
+    required: true
+    description: Matrix case name.
+
+outputs:
+  node-result:
+    description: Node lifecycle result.
+
+runs:
+  using: node20
+  pre: pre.js
+  main: index.js
+  post: post.js

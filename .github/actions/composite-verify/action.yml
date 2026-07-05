@@ -1,0 +1,48 @@
+name: composite-verify
+description: Verify composite action execution, inputs, outputs, env propagation, and summaries.
+
+inputs:
+  case-name:
+    required: true
+    description: Matrix case name.
+  mode-name:
+    required: true
+    description: Matrix mode name.
+
+outputs:
+  composite-result:
+    description: Composite verification result.
+    value: ${{ steps.finish.outputs.composite-result }}
+
+runs:
+  using: composite
+  steps:
+    - name: Validate composite inputs
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        echo "case=${{ inputs.case-name }}"
+        echo "mode=${{ inputs.mode-name }}"
+
+        test -n "${{ inputs.case-name }}"
+        test -n "${{ inputs.mode-name }}"
+
+        echo "PASS: composite inputs available"
+
+    - name: Use composite env and output
+      id: finish
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        RESULT="composite-ok-${{ inputs.case-name }}-${{ inputs.mode-name }}"
+        echo "composite-result=$RESULT" >> "$GITHUB_OUTPUT"
+
+        {
+          echo "### Composite action"
+          echo ""
+          echo "PASS: $RESULT"
+        } >> "$GITHUB_STEP_SUMMARY"
+
+        echo "PASS: composite output set"

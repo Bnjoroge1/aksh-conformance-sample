@@ -1,0 +1,30 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "mega-matcher",
+      "pattern": [
+        {
+          "regexp": "^MEGA_ERROR ([^:]+):(\\d+):(\\d+): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4,
+          "severity": "error"
+        }
+      ]
+    },
+    {
+      "owner": "mega-matcher",
+      "pattern": [
+        {
+          "regexp": "^MEGA_WARN ([^:]+):(\\d+):(\\d+): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4,
+          "severity": "warning"
+        }
+      ]
+    }
+  ]
+}
