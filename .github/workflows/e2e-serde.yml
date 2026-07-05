@@ -2,6 +2,8 @@ name: E2E serde
 on: workflow_dispatch
 
 env:
+  RUSTUP_HOME: /workspace/.rustup
+  CARGO_HOME: /workspace/.cargo
   RUSTUP_TOOLCHAIN: stable
 
 jobs:
