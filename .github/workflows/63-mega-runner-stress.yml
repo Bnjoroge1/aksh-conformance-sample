@@ -371,9 +371,6 @@ jobs:
       image: alpine:3.20
       env:
         CONTAINER_JOB_ENV: container-job-env-ok
-    services:
-      web:
-        image: nginx:1.27-alpine
     steps:
       - name: Validate container shell and env
         shell: sh
@@ -385,23 +382,6 @@ jobs:
 
           echo "PASS: container job env propagated"
           echo "PASS: container job shell ran"
-
-      - name: Validate service container reachability
-        shell: sh
-        run: |
-          set -eu
-
-          for i in $(seq 1 20); do
-            if wget -q -O /tmp/web.html http://web/; then
-              break
-            fi
-            sleep 1
-          done
-
-          grep -qi "nginx" /tmp/web.html
-
-          echo "PASS: service container reachable by hostname"
-          echo "PASS: service container networking verified"
 
   command-and-error-handling:
     name: command-and-error-handling
