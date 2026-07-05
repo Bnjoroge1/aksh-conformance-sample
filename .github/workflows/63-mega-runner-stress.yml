@@ -242,14 +242,14 @@ jobs:
         id: restore-alpha
         uses: actions/cache/restore@v4
         with:
-          path: restored-cache/alpha
+          path: .mega-cache/alpha
           key: ${{ needs.plan.outputs.cache-prefix }}-alpha-debug
 
       - name: Restore beta fallback cache
         id: restore-beta
         uses: actions/cache/restore@v4
         with:
-          path: restored-cache/beta
+          path: .mega-cache/beta
           key: ${{ needs.plan.outputs.cache-prefix }}-beta-nonexistent
           restore-keys: |
             ${{ needs.plan.outputs.cache-prefix }}-beta-
@@ -262,16 +262,16 @@ jobs:
           echo "alpha cache hit: ${{ steps.restore-alpha.outputs.cache-hit }}"
           echo "beta cache hit: ${{ steps.restore-beta.outputs.cache-hit }}"
 
-          test -f restored-cache/alpha/meta.txt
-          test -f restored-cache/alpha/payload.bin
-          test -f restored-cache/alpha/nested/level1/level2/checksum.txt
+          test -f .mega-cache/alpha/meta.txt
+          test -f .mega-cache/alpha/payload.bin
+          test -f .mega-cache/alpha/nested/level1/level2/checksum.txt
 
-          test -f restored-cache/beta/meta.txt
-          test -f restored-cache/beta/payload.bin
-          test -f restored-cache/beta/nested/level1/level2/checksum.txt
+          test -f .mega-cache/beta/meta.txt
+          test -f .mega-cache/beta/payload.bin
+          test -f .mega-cache/beta/nested/level1/level2/checksum.txt
 
-          grep -q "case=alpha" restored-cache/alpha/meta.txt
-          grep -q "case=beta" restored-cache/beta/meta.txt
+          grep -q "case=alpha" .mega-cache/alpha/meta.txt
+          grep -q "case=beta" .mega-cache/beta/meta.txt
 
           echo "PASS: exact cache restore verified"
           echo "PASS: fallback cache restore verified"
