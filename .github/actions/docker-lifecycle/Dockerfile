@@ -7,3 +7,4 @@ RUN chmod +x /test/pre.sh /test/main.sh /test/post.sh
 # official test
 # aksh test
 # debug
+# debug2
