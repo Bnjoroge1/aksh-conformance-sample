@@ -8,11 +8,12 @@ jobs:
       - name: Docker available
         run: docker version
 
-      # 2. Docker container action — run a docker:// action
-      - name: Run docker action
-        uses: docker://alpine:3.20
-        with:
-          args: echo "hello-from-docker-action"
+      # 2. Docker container execution
+      - name: Run docker container
+        run: |
+          RESULT=$(docker run --rm alpine:3.20 echo "hello-from-docker-action")
+          test "$RESULT" = "hello-from-docker-action"
+          echo "Docker container execution verified"
 
       # 3. Build and run a custom Docker image
       - name: Build custom image
