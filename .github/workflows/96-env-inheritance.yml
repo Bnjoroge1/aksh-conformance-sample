@@ -1,12 +1,12 @@
 name: 96-env-inheritance
 on:
   workflow_dispatch:
-timeout-minutes: 5
 env:
   TEST_VAR: workflow-level
 jobs:
   test-env-job-1:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     env:
       TEST_VAR: job-level
     steps:
@@ -30,6 +30,7 @@ jobs:
 
   test-env-job-2:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Job2 should see workflow-level only
         run: |

@@ -1,10 +1,10 @@
 name: 94-action-pinning
 on:
   workflow_dispatch:
-timeout-minutes: 5
 jobs:
   test-action-resolution:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Test checkout with tag
         uses: actions/checkout@v4

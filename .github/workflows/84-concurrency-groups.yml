@@ -3,11 +3,10 @@ name: Concurrency Groups
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   slow-job:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     concurrency:
       group: test-concurrency-group
       cancel-in-progress: true
@@ -23,6 +22,7 @@ jobs:
 
   fast-job:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     concurrency:
       group: test-concurrency-group
       cancel-in-progress: true

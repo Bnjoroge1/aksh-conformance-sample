@@ -3,11 +3,10 @@ name: Permissions Scoping
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   full-permissions:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     permissions:
       contents: write
       pull-requests: write
@@ -25,6 +24,7 @@ jobs:
 
   read-only-permissions:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     permissions:
       contents: read
     steps:
@@ -68,6 +68,7 @@ jobs:
 
   no-permissions:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     permissions: {}
     steps:
       - name: Verify no permissions

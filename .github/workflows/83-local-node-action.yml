@@ -3,11 +3,10 @@ name: Local Node Action
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   setup-action:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
@@ -43,6 +42,7 @@ jobs:
   use-local-action:
     needs: setup-action
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 

@@ -26,11 +26,10 @@ on:
         required: false
         type: environment
 
-timeout-minutes: 5
-
 jobs:
   test-workflow-inputs:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Display all inputs
         run: |

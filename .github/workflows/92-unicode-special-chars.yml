@@ -3,11 +3,10 @@ name: Unicode and Special Characters
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   test-unicode-special-chars:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Set environment with unicode and special chars
         env:

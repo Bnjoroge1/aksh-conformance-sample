@@ -3,11 +3,10 @@ name: Environment Deployments
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   deploy-to-staging:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     environment: staging
     steps:
       - name: Verify environment context
@@ -30,6 +29,7 @@ jobs:
 
   deploy-to-production:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     environment: production
     steps:
       - name: Verify production environment
@@ -51,6 +51,7 @@ jobs:
 
   verify-environment-isolation:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: No environment specified
         run: |

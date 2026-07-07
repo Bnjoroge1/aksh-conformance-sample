@@ -1,10 +1,10 @@
 name: 95-nested-composite-outputs
 on:
   workflow_dispatch:
-timeout-minutes: 5
 jobs:
   test-nested-composite:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

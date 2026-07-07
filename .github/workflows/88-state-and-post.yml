@@ -3,11 +3,10 @@ name: State and Post Step Behavior
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   test-state-and-post:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Set state for post step
         id: main_step

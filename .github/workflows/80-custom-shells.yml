@@ -3,11 +3,10 @@ name: Custom Shells
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   test-python-shell:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Run Python inline script
         shell: python
@@ -30,6 +29,7 @@ jobs:
 
   test-sh-shell:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Run POSIX sh script
         shell: sh
@@ -52,6 +52,7 @@ jobs:
 
   test-shell-exit-codes:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Python exit with non-zero
         shell: python

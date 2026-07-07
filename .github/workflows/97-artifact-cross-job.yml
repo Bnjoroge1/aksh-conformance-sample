@@ -1,10 +1,10 @@
 name: 97-artifact-cross-job
 on:
   workflow_dispatch:
-timeout-minutes: 5
 jobs:
   upload-artifact:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Create test file
         run: |
@@ -20,6 +20,7 @@ jobs:
 
   download-artifact:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     needs: upload-artifact
     steps:
       - name: Download artifact

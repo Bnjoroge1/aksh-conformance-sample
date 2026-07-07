@@ -1,10 +1,10 @@
 name: 100-tool-cache
 on:
   workflow_dispatch:
-timeout-minutes: 5
 jobs:
   test-tool-cache:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Verify runner.tool_cache is set
         run: |

@@ -3,11 +3,10 @@ name: Shell Exit Behavior and Pipefail
 on:
   workflow_dispatch:
 
-timeout-minutes: 5
-
 jobs:
   test-shell-exit-behavior:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Test bash with pipefail (default)
         shell: bash

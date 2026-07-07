@@ -1,10 +1,10 @@
 name: 98-outcome-vs-conclusion
 on:
   workflow_dispatch:
-timeout-minutes: 5
 jobs:
   test-outcome-conclusion:
     runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 5
     steps:
       - name: Successful step
         id: success
