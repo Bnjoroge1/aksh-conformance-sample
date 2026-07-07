@@ -16,6 +16,7 @@ jobs:
           echo "✓ Step completed before timeout"
 
       - name: Step that exceeds timeout
+        id: timeout-step
         timeout-minutes: 1
         run: |
           echo "Starting long-running step (120s sleep)"
@@ -26,7 +27,7 @@ jobs:
       - name: Verify timed-out step failed
         if: always()
         run: |
-          TIMEOUT_STEP_OUTCOME="${{ steps['Step that exceeds timeout'].outcome }}"
+          TIMEOUT_STEP_OUTCOME="${{ steps.timeout-step.outcome }}"
           echo "Timed-out step outcome: $TIMEOUT_STEP_OUTCOME"
           if [[ "$TIMEOUT_STEP_OUTCOME" == "failure" ]]; then
             echo "✓ Step timeout correctly caused failure"

@@ -28,7 +28,7 @@ jobs:
 
       - name: Verify runner.workspace context
         run: |
-          RUNNER_WORKSPACE="${{ runner.workspace }}"
+          RUNNER_WORKSPACE="$RUNNER_WORKSPACE"
           if [ -z "$RUNNER_WORKSPACE" ]; then
             echo "ERROR: runner.workspace is empty"
             exit 1
@@ -61,13 +61,14 @@ jobs:
           echo "working-directory to subdirectory verified"
 
       - name: Test invalid working-directory
+        id: invalid-workdir
         working-directory: /nonexistent/path
         continue-on-error: true
         run: echo "This should fail due to missing directory"
 
       - name: Verify invalid working-directory caused failure
         run: |
-          if [ "${{ steps[5].outcome }}" = "success" ]; then
+          if [ "${{ steps.invalid-workdir.outcome }}" = "success" ]; then
             echo "ERROR: Invalid working-directory should have failed"
             exit 1
           fi

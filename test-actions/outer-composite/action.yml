@@ -9,5 +9,6 @@ runs:
   steps:
     - id: use-inner
       uses: ./test-actions/inner-composite
-    - shell: bash
-      run: echo "Outer received from inner: ${{ steps.use-inner.outputs.inner-value }}"
+    - id: report
+      shell: bash
+      run: echo "Outer received from inner - ${{ steps.use-inner.outputs.inner-value }}"

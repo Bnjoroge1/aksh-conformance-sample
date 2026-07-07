@@ -55,6 +55,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Python exit with non-zero
+        id: python-nonzero
         shell: python
         run: |
           print("Testing non-zero exit")
@@ -63,7 +64,7 @@ jobs:
 
       - name: Verify Python exit code was non-zero
         run: |
-          if [ ${{ steps.test-shell-exit-codes.outcome }} == "failure" ]; then
+          if [ ${{ steps.python-nonzero.outcome }} == "failure" ]; then
             echo "✓ Python non-zero exit detected as failure"
           else
             echo "✗ Python non-zero exit not detected"

@@ -5,7 +5,7 @@ on:
     inputs:
       name_string:
         description: 'A string input'
-        required: true
+        required: false
         default: 'test_default'
         type: string
       enable_feature:
@@ -15,7 +15,7 @@ on:
         type: boolean
       environment_choice:
         description: 'Select environment'
-        required: true
+        required: false
         type: choice
         options:
           - dev

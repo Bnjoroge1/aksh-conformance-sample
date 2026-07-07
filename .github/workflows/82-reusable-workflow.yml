@@ -1,15 +1,10 @@
 name: Reusable Workflow Caller
-
 on:
   workflow_dispatch:
-
 jobs:
   call-reusable:
-    runs-on: [self-hosted, linux, x64]
-    timeout-minutes: 5
     uses: ./.github/workflows/82-reusable-callee.yml
     with:
       message: "Hello from caller"
       enable-feature: true
-    secrets:
-      secret-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit

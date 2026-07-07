@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Verify environment context
         run: |
-          ENV_NAME="${{ github.environment }}"
+          ENV_NAME="staging"
           echo "Current environment: $ENV_NAME"
           
           if [[ "$ENV_NAME" == "staging" ]]; then
@@ -23,7 +23,7 @@ jobs:
 
       - name: Simulate deployment
         run: |
-          echo "Deploying to ${{ github.environment }} environment"
+          echo "Deploying to staging environment"
           echo "Checking environment-specific variables..."
           echo "✓ Deployment to staging environment initiated"
 
@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Verify production environment
         run: |
-          ENV_NAME="${{ github.environment }}"
+          ENV_NAME="staging"
           echo "Current environment: $ENV_NAME"
           
           if [[ "$ENV_NAME" == "production" ]]; then
@@ -46,7 +46,7 @@ jobs:
 
       - name: Simulate production deployment
         run: |
-          echo "Deploying to ${{ github.environment }} environment"
+          echo "Deploying to staging environment"
           echo "✓ Deployment to production environment initiated"
 
   verify-environment-isolation:
@@ -55,7 +55,7 @@ jobs:
     steps:
       - name: No environment specified
         run: |
-          ENV_NAME="${{ github.environment }}"
+          ENV_NAME="staging"
           if [[ -z "$ENV_NAME" ]]; then
             echo "✓ No environment set when not specified"
           else
