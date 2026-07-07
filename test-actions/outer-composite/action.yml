@@ -1,0 +1,13 @@
+name: Outer Composite
+description: Outer composite that calls inner composite and propagates output
+outputs:
+  outer-value:
+    description: Value propagated from inner composite
+    value: ${{ steps.use-inner.outputs.inner-value }}
+runs:
+  using: composite
+  steps:
+    - id: use-inner
+      uses: ./test-actions/inner-composite
+    - shell: bash
+      run: echo "Outer received from inner: ${{ steps.use-inner.outputs.inner-value }}"

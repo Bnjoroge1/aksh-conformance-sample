@@ -1,0 +1,12 @@
+name: Test Local Node Action
+description: A simple local node action for conformance testing
+inputs:
+  greeting:
+    description: Greeting message
+    default: Hello
+outputs:
+  result:
+    description: The greeting result
+runs:
+  using: node20
+  main: index.js

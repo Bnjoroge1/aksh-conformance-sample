@@ -1,0 +1,12 @@
+name: Inner Composite
+description: Inner composite action that sets an output
+outputs:
+  inner-value:
+    description: Value from inner composite
+    value: ${{ steps.inner.outputs.value }}
+runs:
+  using: composite
+  steps:
+    - id: inner
+      shell: bash
+      run: echo "value=inner-output-42" >> $GITHUB_OUTPUT
