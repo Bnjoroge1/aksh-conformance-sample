@@ -4,11 +4,11 @@ on:
 
 jobs:
   call_reusable:
-    uses: preloopdev/aksh-conformance-sample/.github/workflows/reusable-stress.yml@main
+    uses: ./.github/workflows/reusable-stress.yml
     with:
       username: "Alice"
-      enable_feature: "true"
-      max_retries: "42"
+      enable_feature: true
+      max_retries: 42
     secrets:
       api_key: ${{ secrets.MY_API_KEY }}
 
