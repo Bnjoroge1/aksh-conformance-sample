@@ -4,17 +4,17 @@ on:
 
 jobs:
   call_reusable:
-    uses: ./.github/workflows/reusable-stress.yml
+    uses: preloopdev/aksh-conformance-sample/.github/workflows/reusable-stress.yml@main
     with:
       username: "Alice"
-      enable_feature: true
-      max_retries: 42
+      enable_feature: "true"
+      max_retries: "42"
     secrets:
       api_key: ${{ secrets.MY_API_KEY }}
 
   consumer:
     needs: call_reusable
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted, mitm]
     steps:
       - run: |
           echo "Got result from reusable call: ${{ needs.call_reusable.outputs.result }}"

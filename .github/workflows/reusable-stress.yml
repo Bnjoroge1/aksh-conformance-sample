@@ -14,13 +14,15 @@ on:
     secrets:
       api_key:
         required: true
+      parent_secret:
+        required: false
     outputs:
       result:
         value: ${{ jobs.reusable_job.outputs.out_val }}
 
 jobs:
   reusable_job:
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted, mitm]
     outputs:
       out_val: ${{ steps.step1.outputs.step_out }}
     steps:
@@ -30,4 +32,5 @@ jobs:
           echo "Feature enabled: ${{ inputs.enable_feature }}"
           echo "Max retries: ${{ inputs.max_retries }}"
           echo "Is api_key empty? ${{ secrets.api_key == '' }}"
+          echo "Is parent_secret empty? ${{ secrets.parent_secret == '' }}"
           echo "step_out=stress-completed" >> "$GITHUB_OUTPUT"
