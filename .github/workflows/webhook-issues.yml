@@ -1,0 +1,15 @@
+name: Webhook Issues
+on:
+  issues:
+    types: [opened, edited, closed, reopened, assigned, labeled]
+  issue_comment:
+    types: [created, edited, deleted]
+jobs:
+  trigger:
+    runs-on: [self-hosted, trigger-e2e]
+    steps:
+      - name: Log event
+        run: |
+          echo "EVENT: ${{ github.event_name }}"
+          echo "ACTION: ${{ github.event.action }}"
+          echo "REF: ${{ github.ref }}"
