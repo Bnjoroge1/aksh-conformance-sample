@@ -1,0 +1,7 @@
+name: mitm vars context
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: [self-hosted, mitm]
+    steps:
+      - run: echo "vars test"
