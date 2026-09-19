@@ -10,3 +10,4 @@ jobs:
       - run: echo "VALUE_fromjson_null_eq=${{ fromJSON('not json') == null }}"
       - run: echo "BRANCH_fromjson_null_TAKEN"
         if: ${{ fromJSON('not json') == null }}
+# trigger
