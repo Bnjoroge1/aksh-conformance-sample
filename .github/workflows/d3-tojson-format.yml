@@ -1,5 +1,8 @@
 name: d3-tojson-format
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - .github/workflows/d3-tojson-format.yml
 jobs:
   test:
     runs-on: ubuntu-latest
