@@ -1,0 +1,7 @@
+name: d6-join-object
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "JOIN_OBJ_RESULT=[${{ join(fromJSON('{\"a\":1}')) }}]"
