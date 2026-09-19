@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'TOJSON_START'
-      - run: echo "${{ toJSON(fromJSON('{\"b\":2,\"a\":1}')) }}"
+      - run: echo "${{ toJSON(fromJSON('{"b":2,"a":1}')) }}"
       - run: echo 'TOJSON_END'
 # trigger
