@@ -1,5 +1,8 @@
 name: d6-join-object
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - .github/workflows/d6-join-object.yml
 jobs:
   test:
     runs-on: ubuntu-latest
