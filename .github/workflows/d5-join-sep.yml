@@ -7,4 +7,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "JOIN_SEP_RESULT=[${{ join(fromJSON('[\"a\",\"b\"]'), fromJSON('[\"x\"]')) }}]"
+      - run: echo "JOIN_SEP_RESULT=[${{ join(fromJSON('["a","b"]'), fromJSON('["x"]')) }}]"
