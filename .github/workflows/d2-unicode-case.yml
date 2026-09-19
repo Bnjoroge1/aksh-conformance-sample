@@ -1,0 +1,14 @@
+name: d2-unicode-case
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "VALUE_unicode_eq=${{ 'Ä' == 'ä' }}"
+      - run: echo "VALUE_contains=${{ contains('ÄBC', 'ä') }}"
+      - run: echo "VALUE_startsWith=${{ startsWith('ÄBC', 'äb') }}"
+      - run: echo "VALUE_endsWith=${{ endsWith('ABCÄ', 'cä') }}"
+      - run: echo "BRANCH_unicode_eq_TAKEN"
+        if: ${{ 'Ä' == 'ä' }}
+      - run: echo "BRANCH_contains_TAKEN"
+        if: ${{ contains('ÄBC', 'ä') }}
