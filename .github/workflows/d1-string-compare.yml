@@ -1,5 +1,8 @@
 name: d1-string-compare
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - .github/workflows/d1-string-compare.yml
 jobs:
   test:
     runs-on: ubuntu-latest
