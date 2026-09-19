@@ -11,3 +11,4 @@ jobs:
       - run: echo "BRANCH_fromjson_null_TAKEN"
         if: ${{ fromJSON('not json') == null }}
 # trigger
+# trigger2
