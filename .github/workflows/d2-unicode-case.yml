@@ -1,5 +1,8 @@
 name: d2-unicode-case
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - .github/workflows/d2-unicode-case.yml
 jobs:
   test:
     runs-on: ubuntu-latest
