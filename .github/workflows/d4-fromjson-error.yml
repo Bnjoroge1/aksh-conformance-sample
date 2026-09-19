@@ -1,0 +1,9 @@
+name: d4-fromjson-error
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "VALUE_fromjson_null_eq=${{ fromJSON('not json') == null }}"
+      - run: echo "BRANCH_fromjson_null_TAKEN"
+        if: ${{ fromJSON('not json') == null }}
