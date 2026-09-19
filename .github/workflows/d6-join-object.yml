@@ -7,4 +7,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "JOIN_OBJ_RESULT=[${{ join(fromJSON('{\"a\":1}')) }}]"
+      - run: echo "JOIN_OBJ_RESULT=[${{ join(fromJSON('{"a":1}')) }}]"
