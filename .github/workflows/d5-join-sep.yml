@@ -1,5 +1,8 @@
 name: d5-join-sep
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - .github/workflows/d5-join-sep.yml
 jobs:
   test:
     runs-on: ubuntu-latest
