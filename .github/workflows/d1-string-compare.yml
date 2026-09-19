@@ -1,0 +1,12 @@
+name: d1-string-compare
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "VALUE_10_gt_9=${{ '10' > '9' }}"
+      - run: echo "VALUE_2_gt_10=${{ '2' > '10' }}"
+      - run: echo "BRANCH_10_gt_9_TAKEN"
+        if: ${{ '10' > '9' }}
+      - run: echo "BRANCH_2_gt_10_TAKEN"
+        if: ${{ '2' > '10' }}
